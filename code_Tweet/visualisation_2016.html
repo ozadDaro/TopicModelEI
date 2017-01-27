@@ -16,26 +16,118 @@ function LDAvis_load_lib(url, callback){
   document.getElementsByTagName("head")[0].appendChild(s);
 }
 
+ 
+
+/*
+
+function download(filename) {
+  var element = document.createElement('a');
+  element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(JSON.stringify(ldavis_el434344057280804269385084_data)));
+  element.setAttribute('download', filename);
+
+  element.style.display = 'none';
+  document.body.appendChild(element);
+
+  element.click();
+
+  document.body.removeChild(element);
+}*/
+
+//download(ldavis_el434344057280804269385084_data,"test.txt",'text/plain');
+
 if(typeof(LDAvis) !== "undefined"){
+	console.log("icicicici 1");
    // already loaded: just create the visualization
    !function(LDAvis){
        new LDAvis("#" + "ldavis_el434344057280804269385084", ldavis_el434344057280804269385084_data);
    }(LDAvis);
-}else if(typeof define === "function" && define.amd){
+}
+else if(typeof define === "function" && define.amd){
    // require.js is available: use it to load d3/LDAvis
+   console.log("icicicici 2");
+
    require.config({paths: {d3: "https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min"}});
    require(["d3"], function(d3){
       window.d3 = d3;
-      LDAvis_load_lib("https://cdn.rawgit.com/bmabey/pyLDAvis/files/ldavis.v1.0.0.js", function(){
+      LDAvis_load_lib("/Users/ozad/git/TopicModelEI/code_Tweet/ldavis.v1.0.0.js", function(){
         new LDAvis("#" + "ldavis_el434344057280804269385084", ldavis_el434344057280804269385084_data);
       });
     });
 }else{
+
+	console.log("icicicici 3");
+
+
+
     // require.js not available: dynamically load d3 & LDAvis
     LDAvis_load_lib("https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.5/d3.min.js", function(){
-         LDAvis_load_lib("https://cdn.rawgit.com/bmabey/pyLDAvis/files/ldavis.v1.0.0.js", function(){
+         LDAvis_load_lib("/Users/ozad/git/TopicModelEI/code_Tweet/ldavis.v1.0.0.js", function(){
                  new LDAvis("#" + "ldavis_el434344057280804269385084", ldavis_el434344057280804269385084_data);
             })
          });
+
+}
+
+
+
+
+
+
+
+
+</script>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+<script type="text/javascript" src="/Users/ozad/git/TopicModelEI/code_Tweet/ldavis.v1.0.0.js">
+
+
+
+
+</script>
+
+ <form onsubmit="download2(this['name'].value)">
+  <input type="text" name="name" value="save.txt">
+  <input type="submit" value="Save">
+
+
+
+
+
+<p id="demo">Click me.</p>
+<script>
+document.getElementById("demo").onclick = function() {myFunction()};
+
+var tab=reader.readAsText("/Users/ozad/Downloads/save.txt", 'UTF-8');
+console.log(tab);
+
+
+function download2(filename) {
+        console.log("iciiiiii")
+        var element = document.createElement('a');
+
+        element.setAttribute('href',"data:text/plain;charset=utf-8,"+encodeURIComponent(getTabName()));
+        element.setAttribute('download', filename+".txt");
+
+        element.style.display = 'none';
+        document.body.appendChild(element);
+
+        element.click();
+
+        document.body.removeChild(element);
+    }
+
+function myFunction() {
+    document.getElementById("demo").innerHTML = getTabName();
+    download2("test.txt");
 }
 </script>
+
+</form>
+</body>
+</html>
+
