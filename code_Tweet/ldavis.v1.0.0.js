@@ -7,6 +7,7 @@
 
 var tabName={};
 var tabFusion={};
+var tabTopic={};
 
 var LDAvis = function(to_select, data_or_file_name) {
 
@@ -275,6 +276,8 @@ var LDAvis = function(to_select, data_or_file_name) {
                 var tmp1=document.getElementById("fusion1").value;
 
                 removeCircle(document.getElementById(topicID + tmp2));
+                removeCircle(document.getElementById(topicID + tmp2));
+
                 tabFusion[tmp1]=tmp2;
 
 
@@ -473,6 +476,9 @@ var LDAvis = function(to_select, data_or_file_name) {
             })
             .attr("stroke", "black")
             .attr("opacity", 1)
+            .attr("id", function(d) {
+                return (topicID + d.topics);
+            })
             .style("text-anchor", "middle")
             .style("font-size", "11px")
             .style("fontWeight", 100)
@@ -1307,10 +1313,13 @@ var LDAvis = function(to_select, data_or_file_name) {
 
         function removeCircle(circle){
             if (circle == null) return circle;
-            // go back to original opacity/fill
-           // circle.style.opacity = base_opacity;
-            //circle.style.fill = color3;
+            
              circle.remove();
+        }
+
+
+        function getTextTopic(){
+            return document.getElementById(termID + d.Term);
         }
         function topic_off(circle) {
             if (circle == null) return circle;
